@@ -37,13 +37,18 @@ class Application(tk.Frame):
         self.anonymid = tk.StringVar()
         self.anonymidtk = ttk.Entry(self,textvariable=self.anonymid)
         self.anonymidtk.grid(row=2,column=1)
-        self.quit = tk.Button(self, text="QUIT", fg="red",
+        self.quit = tk.Button(self, text="compute anonymed id", fg="red",
                               command=self.say_hi)
         self.quit.grid(row=3,column=0)
     def say_hi(self):
-        print(self.idtype.get(), bytes.fromhex(self.idvalue.get()))
-        print(bytes.fromhex(self.keyvalue.get()))
-        self.anonymid.set(self.keyvalue.get())
+        idvalue = bytes.fromhex(self.idvalue.get())
+        print(self.idtype.get(), idvalue)
+        keyvalue = bytes.fromhex(self.keyvalue.get())
+        print(keyvalue)
+        import hashlib
+        m = hashlib.sha256()
+        m.update(keyvalue)
+        self.anonymid.set(m.hexdigest()[:2*len(idvalue)])
 
 root = tk.Tk()
 app = Application(master=root)
