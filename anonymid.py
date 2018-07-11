@@ -13,8 +13,7 @@ class Application(tk.Frame):
 
     def create_widgets(self):
         self.idtype = tk.StringVar()
-        li     = ['IMSI octs','IMSI BCD','IMEI','ISDN','IPV4','IPV6']
-        self.idtype.set('id type to select:')
+        li     = ['id type to select','IMSI octs','IMSI BCD','IMEI','ISDN','IPV4','IPV6']
         self.idtypetk = ttk.Combobox(self,textvariable=self.idtype)
         self.idtypetk['values'] = li
         self.idtypetk.current(0)
